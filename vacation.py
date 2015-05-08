@@ -4,8 +4,14 @@
 # Hint:
 # Start at the bottom and work upwards.
 
+import site
 
-vacation_spots = ['Tahoe', 'Hawaii', 'New York', 'Mexico']
+vacation_spots = {
+    'snow': 'Tahoe', 
+    'wind': 'Hawaii', 
+    'rain': 'New York',
+    'sun': 'Mexico'
+}
 
 seasons = ['spring', 'summer', 'fall', 'winter']
 
@@ -25,21 +31,13 @@ activities = {
 
 
 def best_vacation_spot(weather_type):
-    # Look at the weather type and return the vacation spot that
-    # is the best for that weather.
-    # You can use this mapping:
-    # snow = Tahoe
-    # wind = Hawaii
-    # rain = New York
-    # sun = Mexico
-
-    return "Stay at home"
+    return vacation_spots[weather_type]
 
 
 def vacation_activity(weather_type):
     # Look up the vacation activity from activities
     # and return just the activity itself
-    print activity
+    return activities[weather_type]
 
 
 def get_my_vacation():
@@ -47,23 +45,25 @@ def get_my_vacation():
     season = raw_input("What season do you want to travel? ")
 
     # check if season is in the seasons list
-    if not seasons:
+    if season not in seasons:
         print "Sorry, that isn't a season. I can't help you."
+        exit()
 
     # look up the weather type for that season
     weather = weather_patterns[season]
 
     # get the best vacation spot for that type
-    best_vacation_spot(weather_type)
+    vacation_spot = best_vacation_spot(weather)
 
     # get the best vacation activity for that type
-    vacation_activity(weather_type)
+    activity = vacation_activity(weather)
 
-    print "You should travel to {}, where you can spend your time {}!".format(vacation_spot, vacation_activity)
+    print "You should travel to {}, where you can spend your time {}!".format(vacation_spot, activity)
 
 
 def main():
     print "Welcome to the Vacation-o-Matic!"
+    get_my_vacation()
 
 
 if __name__=="__main__":
